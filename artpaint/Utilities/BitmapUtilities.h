@@ -26,6 +26,16 @@ public:
 							BRect updated_rect,
 							uint32 (*composite_func)(uint32, uint32) = src_over_fixed,
 							uint32 color = 0xffffffff);
+	static  void		CompositeBitmapOnSourceColorMap(BBitmap* toBuffer,
+							BBitmap* srcBuffer, BBitmap* fromBuffer,
+							BRect updated_rect,
+							uint32 (*composite_func)(uint32, uint32),
+							BBitmap* colorMap);
+	static  void		CompositeBitmapOnSourceFromOffset(BBitmap* toBuffer,
+							BBitmap* srcBuffer, BBitmap* fromBuffer,
+							BRect updated_rect,
+							uint32 (*composite_func)(uint32, uint32),
+							BPoint offset, float opacity = 1.0);
 	static  void		ClearBitmap(BBitmap* bitmap, uint32 color, BRect* area = NULL);
 	static	void		CheckerBitmap(BBitmap* bitmap,
 							uint32 color1, uint32 color2,
@@ -33,6 +43,8 @@ public:
 	static	uint32		GetPixel(BBitmap* bitmap, int32 x, int32 y);
 	static	uint32		GetPixel(BBitmap* bitmap, BPoint location);
 	static 	void		RasterToPolygonsMoore(BBitmap* bitmap, BRect bounds, BList* polygons);
+	static 	void		BlitImage(BBitmap* srcBuffer, BBitmap* dstBuffer, BRect updatedRect);
+
 };
 
 

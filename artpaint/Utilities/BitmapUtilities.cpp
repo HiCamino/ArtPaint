@@ -197,6 +197,114 @@ BitmapUtilities::CompositeBitmapOnSource(BBitmap* toBuffer, BBitmap* srcBuffer, 
 
 
 void
+BitmapUtilities::CompositeBitmapOnSourceColorMap(BBitmap* toBuffer, BBitmap* srcBuffer, BBitmap* fromBuffer,
+	BRect updated_rect, uint32 (*composite_func)(uint32, uint32), BBitmap* colorMap)
+{
+	updated_rect = updated_rect & toBuffer->Bounds();
+
+	int32 bpr = toBuffer->BytesPerRow() / 4;
+	int32 width = updated_rect.IntegerWidth() + 1;
+	int32 height = updated_rect.IntegerHeight() + 1;
+
+	int32 start_x, start_y;
+	start_x = (int32)updated_rect.left;
+	start_y = (int32)updated_rect.top;
+
+	uint32* bits = (uint32*)toBuffer->Bits();
+	bits += bpr * start_y + start_x;
+
+	uint32* src_bits = (uint32*)srcBuffer->Bits();
+	uint32* from_bits = (uint32*)fromBuffer->Bits();
+	uint32* color_bits = (uint32*)colorMap->Bits();
+	int32 color_bpr = colorMap->BytesPerRow() / 4;
+	src_bits += bpr * start_y + start_x;
+	from_bits += bpr * start_y + start_x;
+
+	for (int y = 0; y < height; y++) {
+		int32 ypos = y * bpr;
+		for (int x = 0; x < width; x++) {
+			union color_conversion from_color, mix_color;
+			from_color.word = *(from_bits + x + ypos);
+			mix_color.word = *(color_bits + x + y * color_bpr);
+			for (int i = 0; i < 4; ++i)
+				from_color.bytes[i] = (uint8)((from_color.bytes[i] * mix_color.bytes[i]) / 255);
+
+			*bits++ = (*composite_func)(*(src_bits + x + ypos), from_color.word);
+		}
+		bits += bpr - width;
+	}
+}
+
+
+void
+BitmapUtilities::CompositeBitmapOnSourceFromOffset(BBitmap* toBuffer, BBitmap* srcBuffer,
+	BBitmap* fromBuffer, BRect updated_rect, uint32 (*composite_func)(uint32, uint32),
+	BPoint offset, float opacity)
+{
+	updated_rect = updated_rect & toBuffer->Bounds();
+
+	int32 bpr = toBuffer->BytesPerRow() / 4;
+	int32 width = updated_rect.IntegerWidth() + 1;
+	int32 height = updated_rect.IntegerHeight() + 1;
+
+	int32 start_x, start_y;
+	start_x = (int32)updated_rect.left;
+	start_y = (int32)updated_rect.top;
+
+	uint32* bits = (uint32*)toBuffer->Bits();
+	bits += bpr * start_y + start_x;
+
+	uint32* src_bits = (uint32*)srcBuffer->Bits();
+	uint32* from_bits = (uint32*)fromBuffer->Bits();
+	src_bits += bpr * start_y + start_x;
+	from_bits += bpr * start_y + start_x;
+
+	for (int y = 0; y < height; y++) {
+		int32 ypos = y * bpr;
+		int32 offset_ypos = (y + offset.y) * bpr;
+		for (int x = 0; x < width; x++) {
+			union color_conversion from_color, mix_color;
+			from_color.word = *(from_bits + x + ypos);
+			if (start_y + y + offset.y < 0 || start_x + x + offset.x < 0)
+				mix_color.word = 0;
+			else
+				mix_color.word = *(src_bits + x + (int32)offset.x + offset_ypos);
+			for (int i = 0; i < 3; ++i)
+				from_color.bytes[i] = (uint8)((from_color.bytes[i] * mix_color.bytes[i]) / 255);
+			from_color.bytes[3] = (uint8)((from_color.bytes[3] * opacity * mix_color.bytes[3]) / 255);
+
+			*bits++ = (*composite_func)(*(src_bits + x + ypos), from_color.word);
+		}
+		bits += bpr - width;
+	}
+}
+
+
+void
+BitmapUtilities::BlitImage(BBitmap* srcBuffer, BBitmap* dstBuffer, BRect updatedRect)
+{
+	int32 width = updatedRect.IntegerWidth() + 1;
+	int32 height = updatedRect.IntegerHeight() + 1;
+	int32 bpr = width;
+
+	uint32* src_bits = (uint32*)srcBuffer->Bits();
+	uint32* dst_bits = (uint32*)dstBuffer->Bits();
+	int32 src_bpr =srcBuffer->BytesPerRow() / 4;
+
+	int32 startx = updatedRect.left;
+	int32 starty = updatedRect.top;
+
+	for (int y = 0; y < height; y++) {
+		int32 ypos = y * bpr;
+		int32 srcypos = (y + starty) * src_bpr;
+		for (int x = 0; x < width; x++) {
+			*(dst_bits + x + ypos) = *(src_bits + x + startx + srcypos);
+		}
+	}
+}
+
+
+void
 BitmapUtilities::ClearBitmap(BBitmap* bitmap, uint32 color, BRect* area)
 {
 	int32 width = bitmap->Bounds().IntegerWidth() + 1;

@@ -434,6 +434,7 @@ ToolManager::ToolManager()
 	_AddTool(new EraserTool());
 	_AddTool(new SelectorTool());
 	_AddTool(new ColorSelectorTool());
+	_AddTool(new CloneTool());
 }
 
 
