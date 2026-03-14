@@ -77,6 +77,7 @@ ToolSelectionWindow::ToolSelectionWindow(BRect frame)
 	_AddTool(ToolManager::Instance().ReturnTool(ERASER_TOOL));
 	_AddTool(ToolManager::Instance().ReturnTool(SELECTOR_TOOL));
 	_AddTool(ToolManager::Instance().ReturnTool(COLOR_SELECTOR_TOOL));
+	_AddTool(ToolManager::Instance().ReturnTool(CLONE_TOOL));
 
 	ToolMap::iterator it = gToolMap.find(ToolManager::Instance().ReturnActiveToolType());
 	if (it != gToolMap.end())

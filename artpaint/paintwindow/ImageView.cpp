@@ -76,6 +76,7 @@ ImageView::ImageView(BRect frame, float width, float height)
 
 	// here set the magnify_scale for image
 	magnify_scale = 1.0;
+	scale_factor = 1.0;
 
 	// here we set the grid
 	setGrid(BPoint(0, 0), 1);
@@ -1276,7 +1277,8 @@ ImageView::DrawBrush(BPoint where)
 		|| tool_type == ERASER_TOOL
 		|| tool_type == BLUR_TOOL
 		|| tool_type == TRANSPARENCY_TOOL
-		|| tool_type == COLOR_SELECTOR_TOOL) {
+		|| tool_type == COLOR_SELECTOR_TOOL
+		|| tool_type == CLONE_TOOL) {
 		float width = tool->GetCurrentValue(SIZE_OPTION);
 		float height = width;
 
@@ -1331,6 +1333,12 @@ ImageView::DrawBrush(BPoint where)
 				delete[] shapes;
 			}
 		}
+
+		if (tool_type == CLONE_TOOL) {
+			CloneTool* clone_tool = cast_as(tool, CloneTool);
+			clone_tool->DrawTool(this);
+		}
+
 		SetDrawingMode(old_mode);
 	} else if (tool_type == SELECTOR_TOOL) {
 		SelectorTool* selection_tool = cast_as(tool, SelectorTool);
@@ -1483,6 +1491,8 @@ ImageView::setMagScale(float scale)
 		// we should here also draw the view
 		Invalidate(Bounds());
 		Parent()->Invalidate();
+		float f = scale / 15.;
+		scale_factor = (pow(f, f) - 0.1) / (pow(16., max_c(0.25, 1. - f)) - 0.1);
 	}
 
 	((PaintWindow*)Window())->displayMag(magnify_scale);
@@ -2852,6 +2862,12 @@ KeyFilterFunction(BMessage* message, BHandler** handler, BMessageFilter*)
 								view->SetCursor();
 								view->Invalidate();
 							} break;
+							case 'd':
+							{
+								ToolManager::Instance().ChangeTool(CLONE_TOOL);
+								view->SetCursor();
+								view->Invalidate();
+							}
 						}
 						view->Flush();
 					}

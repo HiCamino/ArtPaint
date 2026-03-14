@@ -12,6 +12,7 @@
 
 #include "DrawingTool.h"
 #include "FreeLineTool.h"
+#include "CloneTool.h"
 #include "SelectorTool.h"
 #include "FillTool.h"
 #include "RectangleTool.h"

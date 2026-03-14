@@ -78,6 +78,7 @@ private:
 			int32		mag_scale_array_index;
 			float*		mag_scale_array;
 			float		magnify_scale;	// magnifying scale for view, normally 1
+			float		scale_factor;
 
 			int32		grid_unit;		// how many pixels is one grid unit, normally 1
 			BPoint		grid_origin;	// the origin for grid, normally (0, 0)
@@ -225,6 +226,7 @@ public:
 			void		setMagScale(float scale);
 	inline	float		getMagScale() { return magnify_scale; }
 			int32		findClosestMagIndex(float scale);
+	inline	float		getScaleFactor() { return scale_factor; }
 
 			void		UpdateImage(BRect bitmap_rect);
 
