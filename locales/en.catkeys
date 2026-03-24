@@ -1,4 +1,4 @@
-1	English	application/x-vnd.artpaint	2403250611
+1	English	application/x-vnd.artpaint	3020182180
 Angle:	Manipulators		Angle:
 Lighten	PixelOperations		Lighten
 Enable antialiasing	Manipulators		Enable antialiasing
@@ -114,6 +114,7 @@ Height:	PaintWindow		Height:
 Use current brush	Tools		Use current brush
 Open image…	PaintWindow		Open image…
 Saves the project to disk.	PaintWindow		Saves the project to disk.
+Cloning part of the image.	Tools		Cloning part of the image.
 Adjustable	Windows		Adjustable
 Don't save	ImageView		Don't save
 Radial	Tools		Radial
@@ -243,6 +244,7 @@ Drawing a freehand line.	Tools		Drawing a freehand line.
 Rotate selection	ImageView		Rotate selection
 Flip horizontally	Manipulators		Flip horizontally
 Flow:	Tools		Flow:
+Clone a part of the image. Right-click to set origin.	Tools		Clone a part of the image. Right-click to set origin.
 Hue	PixelOperations		Hue
 Picking a color.	Tools		Picking a color.
 Opens a project from disk.	PaintWindow		Opens a project from disk.
@@ -279,6 +281,7 @@ Opaque	Manipulators		Opaque
 Moves all layers.	PaintWindow		Moves all layers.
 Hue	ColorSliders	For HSV color slider	Hue
 Scale selection	Manipulators		Scale selection
+Relative to cursor	Tools		Relative to cursor
 Click to place the text.	Tools		Click to place the text.
 Resizes the canvas.	PaintWindow		Resizes the canvas.
 Open project…	PaintWindow		Open project…
@@ -313,8 +316,8 @@ Undos the previous action.	PaintWindow		Undos the previous action.
 Rotate -90°	Manipulators		Rotate -90°
 Application	Windows		Application
 Standard sizes	PaintWindow		Standard sizes
-Bicubic	ScaleUtilities		Bicubic
 Datatype setup: %name%	Windows		Datatype setup: %name%
+Bicubic	ScaleUtilities		Bicubic
 Options	Tools		Options
 Flip selection vertically	ImageView		Flip selection vertically
 Translate selection	ImageView		Translate selection
@@ -328,6 +331,7 @@ Active layer	PaintWindow		Active layer
 Rotate	Manipulators		Rotate
 Bicubic (Catmull-Rom)	ScaleUtilities		Bicubic (Catmull-Rom)
 Click to use the tool.	Tools		Click to use the tool.
+Clone tool	Tools		Clone tool
 Merge down	Image		Merge down
 Color burn	PixelOperations		Color burn
 Window	PaintWindow		Window
@@ -400,6 +404,7 @@ Transparency	Windows		Transparency
 Add layer	Image		Add layer
 Opens the colors window.	PaintWindow		Opens the colors window.
 Quits ArtPaint.	PaintWindow		Quits ArtPaint.
+Sample all layers	Tools		Sample all layers
 Transparency	Tools		Transparency
 Layer transparency	ImageView		Layer transparency
 Delete	PaintWindow		Delete
