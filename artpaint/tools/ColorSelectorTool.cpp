@@ -448,7 +448,7 @@ ColorSelectorToolConfigView::ColorSelectorToolConfigView(DrawingTool* tool)
 		BMessage* all_layers_message = new BMessage(OPTION_CHANGED);
 		all_layers_message->AddInt32("option", MODE_OPTION);
 		all_layers_message->AddInt32("value", tool->GetCurrentValue(MODE_OPTION));
-		fAllLayersCheckbox = new BCheckBox(B_TRANSLATE("Sample all layers"), all_layers_message);
+		fAllLayersCheckbox = new BCheckBox(B_TRANSLATE("Include all layers"), all_layers_message);
 
 		BGridLayout* sizeLayout = LayoutSliderGrid(fSizeSlider);
 

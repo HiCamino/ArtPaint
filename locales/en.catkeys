@@ -1,4 +1,4 @@
-1	English	application/x-vnd.artpaint	3020182180
+1	English	application/x-vnd.artpaint	3460213630
 Angle:	Manipulators		Angle:
 Lighten	PixelOperations		Lighten
 Enable antialiasing	Manipulators		Enable antialiasing
@@ -50,6 +50,7 @@ Fill rectangle	Tools		Fill rectangle
 Text tool	Manipulators		Text tool
 Bicubic (B-spline)	ScaleUtilities		Bicubic (B-spline)
 Spray	Tools		Spray
+Include all layers	Tools		Include all layers
 Colors:	Windows		Colors:
 Fill tool: SHIFT locks 22.5° angles	Tools		Fill tool: SHIFT locks 22.5° angles
 Zoom in	PaintWindow		Zoom in
@@ -404,7 +405,6 @@ Transparency	Windows		Transparency
 Add layer	Image		Add layer
 Opens the colors window.	PaintWindow		Opens the colors window.
 Quits ArtPaint.	PaintWindow		Quits ArtPaint.
-Sample all layers	Tools		Sample all layers
 Transparency	Tools		Transparency
 Layer transparency	ImageView		Layer transparency
 Delete	PaintWindow		Delete

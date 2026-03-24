@@ -365,7 +365,7 @@ CloneToolConfigView::CloneToolConfigView(DrawingTool* tool)
 		message->AddInt32("option", SIZE_OPTION);
 		message->AddInt32("value", tool->GetCurrentValue(SIZE_OPTION));
 
-		fLineSize = new NumberSliderControl(B_TRANSLATE("Width:"), "1", message, 1, 100, false);
+		fLineSize = new NumberSliderControl(B_TRANSLATE("Size:"), "1", message, 1, 100, false);
 
 		BGridLayout* lineSizeLayout = LayoutSliderGrid(fLineSize);
 
@@ -392,7 +392,7 @@ CloneToolConfigView::CloneToolConfigView(DrawingTool* tool)
 		message->AddInt32("option", PREVIEW_ENABLED_OPTION);
 		message->AddInt32("value", 0x00000000);
 
-		fAllLayersCheckbox = new BCheckBox(B_TRANSLATE("Sample all layers"), message);
+		fAllLayersCheckbox = new BCheckBox(B_TRANSLATE("Include all layers"), message);
 
 		layout->AddView(BGroupLayoutBuilder(B_VERTICAL, kWidgetSpacing)
 			.Add(lineSizeLayout)
